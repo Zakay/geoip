@@ -641,6 +641,67 @@ PHP_FUNCTION(geoip_time_zone_by_country_and_region)
 /* }}} */
 #endif
 
+
+/* {{{ proto string geoip_country_code_by_addr( string addr )
+   Return the Country Code found in the GeoIP Database */
+PHP_FUNCTION(geoip_country_code_by_addr)
+{
+	GeoIP * gi;
+	char * addr = NULL;
+	const char * country_code;
+	int arglen;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &addr, &arglen) == FAILURE) {
+		return;
+	}
+
+	if (GeoIP_db_avail(GEOIP_COUNTRY_EDITION)) {
+		gi = GeoIP_open_type(GEOIP_COUNTRY_EDITION, GEOIP_STANDARD);
+	} else {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_COUNTRY_EDITION]);
+		return;
+	}
+	
+	country_code = GeoIP_country_code_by_addr(gi, addr);
+	GeoIP_delete(gi);
+	if (country_code == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Addr %s not found", addr);
+		RETURN_FALSE;
+	}
+	RETURN_STRING((char*)country_code, 1);
+}
+/* }}} */
+
+/* {{{ proto string geoip_country_code_by_addr( string addr )
+   Return the Country Code found in the GeoIP Database */
+PHP_FUNCTION(geoip_country_code3_by_addr)
+{
+	GeoIP * gi;
+	char * addr = NULL;
+	const char * country_code;
+	int arglen;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &addr, &arglen) == FAILURE) {
+		return;
+	}
+
+	if (GeoIP_db_avail(GEOIP_COUNTRY_EDITION)) {
+		gi = GeoIP_open_type(GEOIP_COUNTRY_EDITION, GEOIP_STANDARD);
+	} else {
+		php_error_docref(NULL TSRMLS_CC, E_WARNING, "Required database not available at %s.", GeoIPDBFileName[GEOIP_COUNTRY_EDITION]);
+		return;
+	}
+	
+	country_code = GeoIP_country_code3_by_addr(gi, addr);
+	GeoIP_delete(gi);
+	if (country_code == NULL) {
+		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Addr %s not found", addr);
+		RETURN_FALSE;
+	}
+	RETURN_STRING((char*)country_code, 1);
+}
+/* }}} */
+
 /*
  * Local variables:
  * tab-width: 4
