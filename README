@@ -1,4 +1,27 @@
+== ABOUT ==
 This PHP extension allows you to find the location of an IP address - City, State, 
 Country, Longitude, Latitude, and other information as all, such as ISP and connection type.
 
 To compile it, you will need to have the GeoIP c library installed.
+
+Forked from pecl.php.net/package/geoip (1.0.7)
+
+== INSTALL ==
+
+OSX (MacPorts):
+	sudo port install libgeoip
+
+	Then after unpacking:
+	phpize
+	./configure --prefix=/opt/local --with-php-config=/opt/local/bin/php-config
+	make
+	sudo make install
+
+Ubuntu:
+	sudo apt-get install libgeoip
+
+	Then after unpacking:
+	phpize
+	./configure --with-php-config=/usr/bin/php-config
+	make
+	sudo make install
