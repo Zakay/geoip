@@ -6,6 +6,13 @@ To compile it, you will need to have the GeoIP c library installed.
 
 Forked from pecl.php.net/package/geoip (1.0.7)
 
+
+== CHANGELOG ==
+* Added geoip_country_code_by_addr
+* Added geoip_country_code3_by_addr
+* Removed NOTICE errors when adress isn't found, returning FALSE is enough
+
+
 == INSTALL ==
 
 OSX (MacPorts):
