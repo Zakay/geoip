@@ -306,7 +306,6 @@ PHP_FUNCTION(geoip_country_code_by_name)
 	country_code = GeoIP_country_code_by_name(gi, hostname);
 	GeoIP_delete(gi);
 	if (country_code == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char*)country_code, 1);
@@ -336,7 +335,6 @@ PHP_FUNCTION(geoip_country_code3_by_name)
 	country_code = GeoIP_country_code3_by_name(gi, hostname);
 	GeoIP_delete(gi);
 	if (country_code == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char*)country_code, 1);
@@ -366,7 +364,6 @@ PHP_FUNCTION(geoip_country_name_by_name)
 	country_name = GeoIP_country_name_by_name(gi, hostname);
 	GeoIP_delete(gi);
 	if (country_name == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char*)country_name, 1);
@@ -396,7 +393,6 @@ PHP_FUNCTION(geoip_continent_code_by_name)
 	id = GeoIP_id_by_name(gi, hostname);
 	GeoIP_delete(gi);
 	if (id == 0) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char *)GeoIP_country_continent[id], 1);
@@ -426,7 +422,6 @@ PHP_FUNCTION(geoip_org_by_name)
 	org = GeoIP_org_by_name(gi, hostname);
 	GeoIP_delete(gi);
 	if (org == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	RETVAL_STRING(org, 1);
@@ -462,7 +457,6 @@ PHP_FUNCTION(geoip_record_by_name)
 	GeoIP_delete(gi);
 	
 	if (NULL == gir) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	
@@ -543,7 +537,6 @@ PHP_FUNCTION(geoip_region_by_name)
 	GeoIP_delete(gi);
 
 	if (NULL == region) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 
@@ -578,7 +571,6 @@ PHP_FUNCTION(geoip_isp_by_name)
 	isp = GeoIP_name_by_name(gi, hostname);
 	GeoIP_delete(gi);
 	if (isp == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Host %s not found", hostname);
 		RETURN_FALSE;
 	}
 	RETVAL_STRING(isp, 1);
@@ -667,7 +659,6 @@ PHP_FUNCTION(geoip_country_code_by_addr)
 	country_code = GeoIP_country_code_by_addr(gi, addr);
 	GeoIP_delete(gi);
 	if (country_code == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Addr %s not found", addr);
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char*)country_code, 1);
@@ -697,7 +688,6 @@ PHP_FUNCTION(geoip_country_code3_by_addr)
 	country_code = GeoIP_country_code3_by_addr(gi, addr);
 	GeoIP_delete(gi);
 	if (country_code == NULL) {
-		php_error_docref(NULL TSRMLS_CC, E_NOTICE, "Addr %s not found", addr);
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char*)country_code, 1);
