@@ -56,6 +56,8 @@ function_entry geoip_functions[] = {
 	PHP_FE(geoip_region_name_by_code,	NULL)
 	PHP_FE(geoip_time_zone_by_country_and_region,	NULL)
 #endif
+	PHP_FE(geoip_country_code_by_addr,   NULL)
+	PHP_FE(geoip_country_code3_by_addr,   NULL)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -672,7 +674,7 @@ PHP_FUNCTION(geoip_country_code_by_addr)
 }
 /* }}} */
 
-/* {{{ proto string geoip_country_code_by_addr( string addr )
+/* {{{ proto string geoip_country_code3_by_addr( string addr )
    Return the Country Code found in the GeoIP Database */
 PHP_FUNCTION(geoip_country_code3_by_addr)
 {
