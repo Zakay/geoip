@@ -231,7 +231,7 @@ PHP_FUNCTION(geoip_db_get_all_info)
 
 	for (i=0; i < NUM_DB_TYPES; i++)
 	{
-		if (NULL != GeoIPDBDescription[i])
+		if ((NULL != GeoIPDBDescription[i]) && (NULL != GeoIPDBFileName[i]))
 		{
 			zval *row;
 			ALLOC_INIT_ZVAL(row);
