@@ -58,6 +58,7 @@ function_entry geoip_functions[] = {
 #endif
 	PHP_FE(geoip_country_code_by_addr,   NULL)
 	PHP_FE(geoip_country_code3_by_addr,   NULL)
+	PHP_FE(geoip_setup_custom_directory,   NULL)
 	{NULL, NULL, NULL}
 };
 /* }}} */
@@ -100,6 +101,7 @@ PHP_INI_END()
 static void php_geoip_init_globals(zend_geoip_globals *geoip_globals)
 {
 	geoip_globals->custom_directory = NULL;
+	geoip_globals->set_runtime_custom_directory = 0;
 }
 /* }}} */
 
@@ -163,6 +165,21 @@ PHP_RINIT_FUNCTION(geoip)
  */
 PHP_RSHUTDOWN_FUNCTION(geoip)
 {
+	if (GEOIP_G(set_runtime_custom_directory)) {
+		if (GeoIPDBFileName != NULL) {
+			free(GeoIPDBFileName);
+			GeoIPDBFileName = NULL;
+		}
+
+#ifdef HAVE_CUSTOM_DIRECTORY
+		GeoIP_setup_custom_directory(GEOIP_G(custom_directory));
+#else
+		GeoIP_setup_custom_directory(NULL);
+#endif
+
+		_GeoIP_setup_dbfilename();
+	}
+
 	return SUCCESS;
 }
 /* }}} */
@@ -691,6 +708,29 @@ PHP_FUNCTION(geoip_country_code3_by_addr)
 		RETURN_FALSE;
 	}
 	RETURN_STRING((char*)country_code, 1);
+}
+/* }}} */
+
+/* {{{ proto void geoip_setup_custom_directory( string directory )
+   Sets the custom directory for GeoIP databases */
+PHP_FUNCTION(geoip_setup_custom_directory)
+{
+	char * dir = NULL;
+	int arglen;
+
+	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "s", &dir, &arglen) == FAILURE) {
+		return;
+	}
+
+	GEOIP_G(set_runtime_custom_directory) = 1;
+
+	if (GeoIPDBFileName != NULL) {
+		free(GeoIPDBFileName);
+		GeoIPDBFileName = NULL;
+	}
+
+	GeoIP_setup_custom_directory(dir);
+	_GeoIP_setup_dbfilename();
 }
 /* }}} */
 
