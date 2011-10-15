@@ -26,7 +26,7 @@ OSX (MacPorts):
 	sudo make install
 
 Ubuntu:
-	sudo apt-get install libgeoip
+	sudo apt-get install libgeoip-dev
 
 	Then after unpacking:
 	phpize
