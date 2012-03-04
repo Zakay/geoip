@@ -38,7 +38,7 @@ ZEND_DECLARE_MODULE_GLOBALS(geoip)
 static int le_geoip;
 
 /* {{{ */
-function_entry geoip_functions[] = {
+zend_function_entry geoip_functions[] = {
 	PHP_FE(geoip_database_info,   NULL)   
 	PHP_FE(geoip_country_code_by_name,   NULL)
 	PHP_FE(geoip_country_code3_by_name,   NULL)
