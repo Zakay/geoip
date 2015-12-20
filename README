@@ -13,6 +13,7 @@ Forked from pecl.php.net/package/geoip (1.0.7)
 * Removed NOTICE errors when adress isn't found, returning FALSE is enough
 * Added geoip_setup_custom_directory
 * PHP 5.4 compatibility
+* Added PHP 7 compatibility
 
 
 == INSTALL ==
